@@ -52,13 +52,21 @@
   <p class="sub">Ferramenta do gestor — Pronto Socorro Infantil</p>
 
   <div class="card">
+    <div style="margin-bottom:.5rem;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-weight:600">Planilhas de atendimento</div>
     <div class="drop" id="dropZone" onclick="document.getElementById('fileIn').click()">
       <p>Clique ou arraste os arquivos .xlsx aqui</p>
       <small>Pode adicionar vários dias de uma vez</small>
       <input type="file" id="fileIn" multiple accept=".xlsx,.xls" style="display:none">
     </div>
     <div class="file-list" id="fileList"></div>
-    <button class="btn-primary" id="btnGerar" onclick="gerar()" disabled>Gerar dados.json</button>
+    <div style="margin-top:1rem;margin-bottom:.5rem;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-weight:600">Planilha de horas do mês (opcional)</div>
+    <div class="drop" id="dropZoneHoras" onclick="document.getElementById('fileHoras').click()" style="padding:1rem">
+      <p>Clique ou arraste a planilha de horas trabalhadas</p>
+      <small>Ex: HorasTrabalhadasHMB...</small>
+      <input type="file" id="fileHoras" accept=".xlsx,.xls" style="display:none">
+    </div>
+    <div id="horasFileInfo" style="font-size:12px;color:var(--success);margin-bottom:.5rem;min-height:18px"></div>
+    <button class="btn-primary" id="btnGerar" onclick="gerar()" disabled>Gerar arquivos</button>
     <div class="status" id="status"></div>
     <div class="metric" id="metrics" style="display:none">
       <div class="m"><div class="m-label">Total fichas</div><div class="m-value" id="mFichas">0</div></div>
@@ -66,41 +74,58 @@
       <div class="m"><div class="m-label">Dias</div><div class="m-value" id="mDias">0</div></div>
       <div class="m"><div class="m-label">Arquivos</div><div class="m-value" id="mArqs">0</div></div>
     </div>
-    <button class="btn-dl" id="btnDl" style="display:none" onclick="baixar()">Baixar dados.json</button>
+    <div id="dlButtons" style="display:none">
+      <button class="btn-dl" onclick="baixar('dados')">Baixar dados.json</button>
+      <button class="btn-dl" id="btnDlHoras" onclick="baixar('horas')" style="display:none">Baixar horas.json</button>
+    </div>
   </div>
 
   <div class="card">
     <p style="font-size:14px;font-weight:600;margin-bottom:1rem">Como usar</p>
     <div class="step">
       <div class="step-num">1</div>
-      <p>Arraste os arquivos <strong>.xlsx</strong> acima e clique em <strong>Gerar dados.json</strong></p>
+      <p>Arraste as planilhas de atendimento e (opcionalmente) a planilha de horas do mês</p>
     </div>
     <div class="step">
       <div class="step-num">2</div>
-      <p>Baixe o arquivo <strong>dados.json</strong> gerado</p>
+      <p>Clique em <strong>Gerar arquivos</strong> e baixe o <strong>dados.json</strong> e o <strong>horas.json</strong></p>
     </div>
     <div class="step">
       <div class="step-num">3</div>
-      <p>No GitHub, abra o repositório <code>painelpsi</code>, clique em <strong>Add file → Upload files</strong> e envie o <strong>dados.json</strong></p>
+      <p>No GitHub, abra o repositório <code>painelpsi</code>, clique em <strong>Add file → Upload files</strong> e envie os arquivos baixados</p>
     </div>
     <div class="step">
       <div class="step-num">4</div>
-      <p>Aguarde 1-2 minutos e os médicos já verão os dados atualizados ao fazer login</p>
+      <p>Aguarde 1-2 minutos e os médicos já verão os dados atualizados</p>
     </div>
     <hr>
-    <p style="font-size:12px;color:var(--muted)">Para adicionar novos dias, basta incluir os novos arquivos junto com os anteriores e gerar um novo <code>dados.json</code>.</p>
+    <p style="font-size:12px;color:var(--muted)">Todo mês: suba as novas planilhas de atendimento + a nova planilha de horas para atualizar tudo.</p>
   </div>
 </div>
 
 <script>
 const files = {};
 let dadosJson = null;
+let horasJson = null;
+let horasFile = null;
 
 const dz = document.getElementById('dropZone');
 dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('over'); });
 dz.addEventListener('dragleave', () => dz.classList.remove('over'));
 dz.addEventListener('drop', e => { e.preventDefault(); dz.classList.remove('over'); addFiles([...e.dataTransfer.files]); });
 document.getElementById('fileIn').addEventListener('change', e => { addFiles([...e.target.files]); e.target.value=''; });
+
+const dzH = document.getElementById('dropZoneHoras');
+dzH.addEventListener('dragover', e => { e.preventDefault(); dzH.classList.add('over'); });
+dzH.addEventListener('dragleave', () => dzH.classList.remove('over'));
+dzH.addEventListener('drop', e => { e.preventDefault(); dzH.classList.remove('over'); setHorasFile(e.dataTransfer.files[0]); });
+document.getElementById('fileHoras').addEventListener('change', e => { setHorasFile(e.target.files[0]); e.target.value=''; });
+
+function setHorasFile(f) {
+  if (!f) return;
+  horasFile = f;
+  document.getElementById('horasFileInfo').textContent = '✓ ' + f.name + ' carregado';
+}
 
 function addFiles(fs) {
   fs.forEach(f => { if (!files[f.name]) files[f.name] = f; addPill(f.name); });
@@ -197,18 +222,55 @@ async function gerar() {
   document.getElementById('metrics').style.display = 'grid';
   document.getElementById('btnDl').style.display = 'block';
 
-  st.textContent = `✓ ${allRows.length} fichas processadas com sucesso!`;
+  // Process horas if provided
+  if (horasFile) {
+    try {
+      horasJson = await processHoras(horasFile);
+      document.getElementById('btnDlHoras').style.display = 'block';
+    } catch(e) { console.error('Erro horas:', e); }
+  }
+
+  document.getElementById('dlButtons').style.display = 'block';
+  st.textContent = `✓ ${allRows.length} fichas processadas com sucesso!${horasJson ? ' Horas também geradas.' : ''}`;
   st.className = 'status ok';
   btn.disabled = false;
 }
 
-function baixar() {
-  if (!dadosJson) return;
-  const blob = new Blob([JSON.stringify(dadosJson)], { type: 'application/json' });
+function baixar(tipo) {
+  const data = tipo === 'horas' ? horasJson : dadosJson;
+  const name = tipo === 'horas' ? 'horas.json' : 'dados.json';
+  if (!data) return;
+  const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
-  a.download = 'dados.json';
+  a.download = name;
   a.click();
+}
+
+async function processHoras(file) {
+  const buf = await file.arrayBuffer();
+  const wb = XLSX.read(buf, { type: 'array', cellDates: false });
+  const ws = wb.Sheets[wb.SheetNames[0]];
+  const allRows = XLSX.utils.sheet_to_array(ws);
+  const result = {};
+  for (let i = 6; i < allRows.length; i++) {
+    const row = allRows[i];
+    const nome = row[0];
+    const registro = row[1];
+    if (!nome || typeof nome !== 'string') continue;
+    if (!registro || typeof registro !== 'string') continue;
+    const crm = registro.replace(/\/\w+/, '').trim();
+    if (!/^\d+$/.test(crm)) continue;
+    const totalD = parseFloat(row[row.length-2] || 0) || 0;
+    const totalN = parseFloat(row[row.length-1] || 0) || 0;
+    result[crm] = {
+      nome: nome.trim(),
+      horas_diurno: Math.round(totalD * 10) / 10,
+      horas_noturno: Math.round(totalN * 10) / 10,
+      horas_total: Math.round((totalD + totalN) * 10) / 10
+    };
+  }
+  return result;
 }
 </script>
 </body>

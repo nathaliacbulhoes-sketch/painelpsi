@@ -1,0 +1,362 @@
+{
+  "96791": {
+    "nome": "Adriana Cavalcanti Dominguez",
+    "horas_diurno": 18.0,
+    "horas_noturno": 1.0,
+    "horas_total": 19.0
+  },
+  "234277": {
+    "nome": "Alana Cardoso Alberto",
+    "horas_diurno": 66.0,
+    "horas_noturno": 51.0,
+    "horas_total": 117.0
+  },
+  "207264": {
+    "nome": "Amanda Rezende Martins",
+    "horas_diurno": 0.0,
+    "horas_noturno": 30.0,
+    "horas_total": 30.0
+  },
+  "12005": {
+    "nome": "Ana Carolina Fernandes e Barros",
+    "horas_diurno": 60.0,
+    "horas_noturno": 35.1,
+    "horas_total": 95.1
+  },
+  "73843": {
+    "nome": "Ana Maria de Oliveira Sanches",
+    "horas_diurno": 90.0,
+    "horas_noturno": 0.0,
+    "horas_total": 90.0
+  },
+  "211672": {
+    "nome": "Ana Paola Martins Tanganini",
+    "horas_diurno": 18.0,
+    "horas_noturno": 14.0,
+    "horas_total": 32.0
+  },
+  "170189": {
+    "nome": "Analidia Camejo",
+    "horas_diurno": 34.0,
+    "horas_noturno": 157.1,
+    "horas_total": 191.1
+  },
+  "209169": {
+    "nome": "Andressa Camargo Vieira",
+    "horas_diurno": 0.0,
+    "horas_noturno": 136.1,
+    "horas_total": 136.1
+  },
+  "146634": {
+    "nome": "Anita Giacomini Novais",
+    "horas_diurno": 29.0,
+    "horas_noturno": 10.0,
+    "horas_total": 39.0
+  },
+  "214600": {
+    "nome": "Beatriz Dos Santos Nunes",
+    "horas_diurno": 6.0,
+    "horas_noturno": 10.0,
+    "horas_total": 16.0
+  },
+  "192048": {
+    "nome": "Bianca Senedezzi De Assis",
+    "horas_diurno": 0.0,
+    "horas_noturno": 5.0,
+    "horas_total": 5.0
+  },
+  "148748": {
+    "nome": "Brenda Ivonne Martinez Martinez",
+    "horas_diurno": 0.0,
+    "horas_noturno": 82.0,
+    "horas_total": 82.0
+  },
+  "124206": {
+    "nome": "Camila Barini",
+    "horas_diurno": 6.0,
+    "horas_noturno": 20.0,
+    "horas_total": 26.0
+  },
+  "210072": {
+    "nome": "Carolina Ricci Castelan",
+    "horas_diurno": 30.0,
+    "horas_noturno": 0.0,
+    "horas_total": 30.0
+  },
+  "56813": {
+    "nome": "Cássia Cristina Mirachi Venci Gonzalez",
+    "horas_diurno": 12.0,
+    "horas_noturno": 0.0,
+    "horas_total": 12.0
+  },
+  "81655": {
+    "nome": "Dalmo Chequer Junior",
+    "horas_diurno": 0.0,
+    "horas_noturno": 240.0,
+    "horas_total": 240.0
+  },
+  "239492": {
+    "nome": "Daniela Maria Pereira",
+    "horas_diurno": 18.0,
+    "horas_noturno": 37.0,
+    "horas_total": 55.0
+  },
+  "218537": {
+    "nome": "Daniele Moura Campos Martins Rodrigues",
+    "horas_diurno": 1.0,
+    "horas_noturno": 56.0,
+    "horas_total": 57.0
+  },
+  "229560": {
+    "nome": "Davi de França Gomes Vieira",
+    "horas_diurno": 0.0,
+    "horas_noturno": 48.0,
+    "horas_total": 48.0
+  },
+  "210085": {
+    "nome": "Debora Ribeiro Fernandes",
+    "horas_diurno": 18.0,
+    "horas_noturno": 109.2,
+    "horas_total": 127.2
+  },
+  "53261": {
+    "nome": "Denise da Silva",
+    "horas_diurno": 46.0,
+    "horas_noturno": 22.0,
+    "horas_total": 68.0
+  },
+  "66057": {
+    "nome": "Ezio Luiz Marson Gambini",
+    "horas_diurno": 0.0,
+    "horas_noturno": 197.0,
+    "horas_total": 197.0
+  },
+  "104454": {
+    "nome": "Fabiana Hora Gardino",
+    "horas_diurno": 51.0,
+    "horas_noturno": 10.0,
+    "horas_total": 61.0
+  },
+  "250202": {
+    "nome": "Fernanda Diniz Fernandes",
+    "horas_diurno": 0.0,
+    "horas_noturno": 10.0,
+    "horas_total": 10.0
+  },
+  "121923": {
+    "nome": "Fernando Almeida Rizzo",
+    "horas_diurno": 12.0,
+    "horas_noturno": 0.0,
+    "horas_total": 12.0
+  },
+  "218638": {
+    "nome": "Gabriela Dadalto Oliveira",
+    "horas_diurno": 18.0,
+    "horas_noturno": 105.0,
+    "horas_total": 123.0
+  },
+  "23559": {
+    "nome": "Ivo Futigami",
+    "horas_diurno": 174.0,
+    "horas_noturno": 52.0,
+    "horas_total": 226.0
+  },
+  "160299": {
+    "nome": "João Paulo Rodrigues V. Godinho",
+    "horas_diurno": 119.0,
+    "horas_noturno": 49.1,
+    "horas_total": 168.1
+  },
+  "58268": {
+    "nome": "Laura Maria Favoretto",
+    "horas_diurno": 18.0,
+    "horas_noturno": 0.0,
+    "horas_total": 18.0
+  },
+  "122157": {
+    "nome": "Leandro Abbade Peretti",
+    "horas_diurno": 12.0,
+    "horas_noturno": 0.0,
+    "horas_total": 12.0
+  },
+  "214747": {
+    "nome": "Leticia Moro",
+    "horas_diurno": 18.0,
+    "horas_noturno": 0.0,
+    "horas_total": 18.0
+  },
+  "124350": {
+    "nome": "Lilian Argentino Pinchiari",
+    "horas_diurno": 54.0,
+    "horas_noturno": 0.0,
+    "horas_total": 54.0
+  },
+  "85248": {
+    "nome": "Lucia Akemi Nukumizu",
+    "horas_diurno": 114.0,
+    "horas_noturno": 15.0,
+    "horas_total": 129.0
+  },
+  "38162": {
+    "nome": "Lucia Aparecida Piva Visoni",
+    "horas_diurno": 66.0,
+    "horas_noturno": 15.0,
+    "horas_total": 81.0
+  },
+  "46118": {
+    "nome": "Luisa Helena Teixeira Alves",
+    "horas_diurno": 48.0,
+    "horas_noturno": 10.0,
+    "horas_total": 58.0
+  },
+  "212833": {
+    "nome": "Malu Menezes Gomides",
+    "horas_diurno": 0.0,
+    "horas_noturno": 42.1,
+    "horas_total": 42.1
+  },
+  "94563": {
+    "nome": "Marcia Mitiko Morita",
+    "horas_diurno": 129.0,
+    "horas_noturno": 3.0,
+    "horas_total": 132.0
+  },
+  "214239": {
+    "nome": "Maria Eduarda Costa Marques",
+    "horas_diurno": 23.2,
+    "horas_noturno": 34.9,
+    "horas_total": 58.2
+  },
+  "237083": {
+    "nome": "Maria Laura Kachan Bordignon",
+    "horas_diurno": 6.0,
+    "horas_noturno": 10.0,
+    "horas_total": 16.0
+  },
+  "217128": {
+    "nome": "Mariana Carneiro Tannus",
+    "horas_diurno": 0.0,
+    "horas_noturno": 15.0,
+    "horas_total": 15.0
+  },
+  "69038": {
+    "nome": "Marina Xavier de Serpa Pinto",
+    "horas_diurno": 36.0,
+    "horas_noturno": 0.0,
+    "horas_total": 36.0
+  },
+  "191475": {
+    "nome": "Michelle Caroline Alves",
+    "horas_diurno": 24.0,
+    "horas_noturno": 0.0,
+    "horas_total": 24.0
+  },
+  "207389": {
+    "nome": "Monique Viana Carvalho",
+    "horas_diurno": 16.0,
+    "horas_noturno": 5.0,
+    "horas_total": 21.0
+  },
+  "189313": {
+    "nome": "Nathalia de Lima Farias",
+    "horas_diurno": 0.0,
+    "horas_noturno": 10.0,
+    "horas_total": 10.0
+  },
+  "220802": {
+    "nome": "Nicole Reverdosa Castro Barbosa",
+    "horas_diurno": 0.0,
+    "horas_noturno": 35.1,
+    "horas_total": 35.1
+  },
+  "145678": {
+    "nome": "Paulo Guilherme Koyti Yoshida Mori",
+    "horas_diurno": 21.0,
+    "horas_noturno": 7.0,
+    "horas_total": 28.0
+  },
+  "207165": {
+    "nome": "Regislaine Carvalho",
+    "horas_diurno": 0.0,
+    "horas_noturno": 17.0,
+    "horas_total": 17.0
+  },
+  "157370": {
+    "nome": "Renata Yoshihara Gusson",
+    "horas_diurno": 54.0,
+    "horas_noturno": 0.0,
+    "horas_total": 54.0
+  },
+  "149400": {
+    "nome": "Rene Molina Tapia",
+    "horas_diurno": 35.2,
+    "horas_noturno": 47.0,
+    "horas_total": 82.2
+  },
+  "75535": {
+    "nome": "Rosivania Gois Cruz Coelho",
+    "horas_diurno": 6.0,
+    "horas_noturno": 0.0,
+    "horas_total": 6.0
+  },
+  "19652": {
+    "nome": "Shirley Vila",
+    "horas_diurno": 18.0,
+    "horas_noturno": 15.0,
+    "horas_total": 33.0
+  },
+  "65995": {
+    "nome": "Solange Goneli Wichert",
+    "horas_diurno": 90.0,
+    "horas_noturno": 0.0,
+    "horas_total": 90.0
+  },
+  "97894": {
+    "nome": "Stela Santi Crepaldi",
+    "horas_diurno": 6.0,
+    "horas_noturno": 0.0,
+    "horas_total": 6.0
+  },
+  "76443": {
+    "nome": "Susana Scarin Silveira",
+    "horas_diurno": 18.0,
+    "horas_noturno": 0.0,
+    "horas_total": 18.0
+  },
+  "213232": {
+    "nome": "Thais A Lacerda",
+    "horas_diurno": 18.0,
+    "horas_noturno": 5.0,
+    "horas_total": 23.0
+  },
+  "213110": {
+    "nome": "Thiago Queiroz Villas Boas",
+    "horas_diurno": 78.0,
+    "horas_noturno": 25.0,
+    "horas_total": 103.0
+  },
+  "193059": {
+    "nome": "Vanessa Mayla de Britto",
+    "horas_diurno": 54.5,
+    "horas_noturno": 0.0,
+    "horas_total": 54.5
+  },
+  "179374": {
+    "nome": "Verônica de Caires Bosque",
+    "horas_diurno": 48.0,
+    "horas_noturno": 0.0,
+    "horas_total": 48.0
+  },
+  "226882": {
+    "nome": "Victor Dividino Fantinatti",
+    "horas_diurno": 12.0,
+    "horas_noturno": 15.0,
+    "horas_total": 27.0
+  },
+  "206520": {
+    "nome": "William Hafid Fonseca Machado",
+    "horas_diurno": 0.0,
+    "horas_noturno": 7.0,
+    "horas_total": 7.0
+  }
+}
