@@ -1,0 +1,534 @@
+{
+  "66057": {
+    "taxa_exame": 9.8,
+    "taxa_20min": 56.9,
+    "total": 174,
+    "exames": 17,
+    "menos20": 99
+  },
+  "218638": {
+    "taxa_exame": 14.2,
+    "taxa_20min": 44.2,
+    "total": 120,
+    "exames": 17,
+    "menos20": 53
+  },
+  "69038": {
+    "taxa_exame": 3.0,
+    "taxa_20min": 78.8,
+    "total": 33,
+    "exames": 1,
+    "menos20": 26
+  },
+  "193059": {
+    "taxa_exame": 10.5,
+    "taxa_20min": 42.1,
+    "total": 57,
+    "exames": 6,
+    "menos20": 24
+  },
+  "94563": {
+    "taxa_exame": 13.5,
+    "taxa_20min": 41.9,
+    "total": 148,
+    "exames": 20,
+    "menos20": 62
+  },
+  "160299": {
+    "taxa_exame": 15.0,
+    "taxa_20min": 43.7,
+    "total": 206,
+    "exames": 31,
+    "menos20": 90
+  },
+  "23559": {
+    "taxa_exame": 3.3,
+    "taxa_20min": 46.4,
+    "total": 330,
+    "exames": 11,
+    "menos20": 153
+  },
+  "250202": {
+    "taxa_exame": 0.0,
+    "taxa_20min": 71.4,
+    "total": 14,
+    "exames": 0,
+    "menos20": 10
+  },
+  "81655": {
+    "taxa_exame": 17.3,
+    "taxa_20min": 50.6,
+    "total": 156,
+    "exames": 27,
+    "menos20": 79
+  },
+  "38162": {
+    "taxa_exame": 20.2,
+    "taxa_20min": 46.5,
+    "total": 114,
+    "exames": 23,
+    "menos20": 53
+  },
+  "85248": {
+    "taxa_exame": 16.7,
+    "taxa_20min": 50.0,
+    "total": 162,
+    "exames": 27,
+    "menos20": 81
+  },
+  "73843": {
+    "taxa_exame": 6.7,
+    "taxa_20min": 50.0,
+    "total": 104,
+    "exames": 7,
+    "menos20": 52
+  },
+  "46118": {
+    "taxa_exame": 1.5,
+    "taxa_20min": 51.5,
+    "total": 66,
+    "exames": 1,
+    "menos20": 34
+  },
+  "229560": {
+    "taxa_exame": 0.0,
+    "taxa_20min": 48.6,
+    "total": 35,
+    "exames": 0,
+    "menos20": 17
+  },
+  "170189": {
+    "taxa_exame": 13.3,
+    "taxa_20min": 51.1,
+    "total": 180,
+    "exames": 24,
+    "menos20": 92
+  },
+  "209169": {
+    "taxa_exame": 3.5,
+    "taxa_20min": 61.1,
+    "total": 113,
+    "exames": 4,
+    "menos20": 69
+  },
+  "217128": {
+    "taxa_exame": 0.0,
+    "taxa_20min": 89.5,
+    "total": 19,
+    "exames": 0,
+    "menos20": 17
+  },
+  "210085": {
+    "taxa_exame": 11.4,
+    "taxa_20min": 57.0,
+    "total": 114,
+    "exames": 13,
+    "menos20": 65
+  },
+  "157370": {
+    "taxa_exame": 11.8,
+    "taxa_20min": 54.9,
+    "total": 51,
+    "exames": 6,
+    "menos20": 28
+  },
+  "218537": {
+    "taxa_exame": 9.3,
+    "taxa_20min": 46.5,
+    "total": 43,
+    "exames": 4,
+    "menos20": 20
+  },
+  "149400": {
+    "taxa_exame": 15.4,
+    "taxa_20min": 36.2,
+    "total": 130,
+    "exames": 20,
+    "menos20": 47
+  },
+  "192500": {
+    "taxa_exame": 12.0,
+    "taxa_20min": 50.6,
+    "total": 83,
+    "exames": 10,
+    "menos20": 42
+  },
+  "97894": {
+    "taxa_exame": 15.4,
+    "taxa_20min": 69.2,
+    "total": 13,
+    "exames": 2,
+    "menos20": 9
+  },
+  "214239": {
+    "taxa_exame": 19.4,
+    "taxa_20min": 29.9,
+    "total": 67,
+    "exames": 13,
+    "menos20": 20
+  },
+  "25152": {
+    "taxa_exame": 0.0,
+    "taxa_20min": 48.8,
+    "total": 162,
+    "exames": 0,
+    "menos20": 79
+  },
+  "200421": {
+    "taxa_exame": 0.0,
+    "taxa_20min": 48.4,
+    "total": 93,
+    "exames": 0,
+    "menos20": 45
+  },
+  "212833": {
+    "taxa_exame": 15.4,
+    "taxa_20min": 76.9,
+    "total": 26,
+    "exames": 4,
+    "menos20": 20
+  },
+  "56813": {
+    "taxa_exame": 46.7,
+    "taxa_20min": 40.0,
+    "total": 15,
+    "exames": 7,
+    "menos20": 6
+  },
+  "148748": {
+    "taxa_exame": 26.0,
+    "taxa_20min": 35.4,
+    "total": 96,
+    "exames": 25,
+    "menos20": 34
+  },
+  "212621": {
+    "taxa_exame": 2.2,
+    "taxa_20min": 53.3,
+    "total": 45,
+    "exames": 1,
+    "menos20": 24
+  },
+  "122157": {
+    "taxa_exame": 0.0,
+    "taxa_20min": 46.7,
+    "total": 15,
+    "exames": 0,
+    "menos20": 7
+  },
+  "210072": {
+    "taxa_exame": 9.8,
+    "taxa_20min": 51.2,
+    "total": 41,
+    "exames": 4,
+    "menos20": 21
+  },
+  "146634": {
+    "taxa_exame": 23.0,
+    "taxa_20min": 45.9,
+    "total": 61,
+    "exames": 14,
+    "menos20": 28
+  },
+  "58268": {
+    "taxa_exame": 4.2,
+    "taxa_20min": 66.7,
+    "total": 24,
+    "exames": 1,
+    "menos20": 16
+  },
+  "104454": {
+    "taxa_exame": 20.9,
+    "taxa_20min": 49.5,
+    "total": 91,
+    "exames": 19,
+    "menos20": 45
+  },
+  "239492": {
+    "taxa_exame": 17.4,
+    "taxa_20min": 47.8,
+    "total": 46,
+    "exames": 8,
+    "menos20": 22
+  },
+  "53261": {
+    "taxa_exame": 13.3,
+    "taxa_20min": 45.6,
+    "total": 90,
+    "exames": 12,
+    "menos20": 41
+  },
+  "234277": {
+    "taxa_exame": 15.7,
+    "taxa_20min": 58.5,
+    "total": 159,
+    "exames": 25,
+    "menos20": 93
+  },
+  "124206": {
+    "taxa_exame": 7.1,
+    "taxa_20min": 23.8,
+    "total": 42,
+    "exames": 3,
+    "menos20": 10
+  },
+  "123813": {
+    "taxa_exame": 0.0,
+    "taxa_20min": 59.1,
+    "total": 22,
+    "exames": 0,
+    "menos20": 13
+  },
+  "76443": {
+    "taxa_exame": 12.0,
+    "taxa_20min": 44.0,
+    "total": 25,
+    "exames": 3,
+    "menos20": 11
+  },
+  "58145": {
+    "taxa_exame": 0.0,
+    "taxa_20min": 66.7,
+    "total": 6,
+    "exames": 0,
+    "menos20": 4
+  },
+  "146653": {
+    "taxa_exame": 0.0,
+    "taxa_20min": 80.0,
+    "total": 10,
+    "exames": 0,
+    "menos20": 8
+  },
+  "213110": {
+    "taxa_exame": 20.1,
+    "taxa_20min": 51.5,
+    "total": 134,
+    "exames": 27,
+    "menos20": 69
+  },
+  "179374": {
+    "taxa_exame": 9.0,
+    "taxa_20min": 33.3,
+    "total": 78,
+    "exames": 7,
+    "menos20": 26
+  },
+  "222076": {
+    "taxa_exame": 0.0,
+    "taxa_20min": 50.0,
+    "total": 2,
+    "exames": 0,
+    "menos20": 1
+  },
+  "189313": {
+    "taxa_exame": 8.3,
+    "taxa_20min": 83.3,
+    "total": 12,
+    "exames": 1,
+    "menos20": 10
+  },
+  "220802": {
+    "taxa_exame": 13.6,
+    "taxa_20min": 86.4,
+    "total": 22,
+    "exames": 3,
+    "menos20": 19
+  },
+  "124350": {
+    "taxa_exame": 8.9,
+    "taxa_20min": 55.6,
+    "total": 45,
+    "exames": 4,
+    "menos20": 25
+  },
+  "225576": {
+    "taxa_exame": 0.0,
+    "taxa_20min": 100.0,
+    "total": 2,
+    "exames": 0,
+    "menos20": 2
+  },
+  "65995": {
+    "taxa_exame": 14.3,
+    "taxa_20min": 50.9,
+    "total": 112,
+    "exames": 16,
+    "menos20": 57
+  },
+  "39328": {
+    "taxa_exame": 0.0,
+    "taxa_20min": 100.0,
+    "total": 1,
+    "exames": 0,
+    "menos20": 1
+  },
+  "202801": {
+    "taxa_exame": 0.0,
+    "taxa_20min": 100.0,
+    "total": 1,
+    "exames": 0,
+    "menos20": 1
+  },
+  "211672": {
+    "taxa_exame": 10.5,
+    "taxa_20min": 42.1,
+    "total": 38,
+    "exames": 4,
+    "menos20": 16
+  },
+  "140430": {
+    "taxa_exame": 14.3,
+    "taxa_20min": 71.4,
+    "total": 7,
+    "exames": 1,
+    "menos20": 5
+  },
+  "214747": {
+    "taxa_exame": 4.0,
+    "taxa_20min": 64.0,
+    "total": 25,
+    "exames": 1,
+    "menos20": 16
+  },
+  "226882": {
+    "taxa_exame": 14.9,
+    "taxa_20min": 42.6,
+    "total": 47,
+    "exames": 7,
+    "menos20": 20
+  },
+  "75535": {
+    "taxa_exame": 25.0,
+    "taxa_20min": 75.0,
+    "total": 4,
+    "exames": 1,
+    "menos20": 3
+  },
+  "150463": {
+    "taxa_exame": 0.0,
+    "taxa_20min": 100.0,
+    "total": 1,
+    "exames": 0,
+    "menos20": 1
+  },
+  "214600": {
+    "taxa_exame": 2.0,
+    "taxa_20min": 53.1,
+    "total": 49,
+    "exames": 1,
+    "menos20": 26
+  },
+  "207264": {
+    "taxa_exame": 12.5,
+    "taxa_20min": 35.0,
+    "total": 40,
+    "exames": 5,
+    "menos20": 14
+  },
+  "207389": {
+    "taxa_exame": 10.0,
+    "taxa_20min": 50.0,
+    "total": 10,
+    "exames": 1,
+    "menos20": 5
+  },
+  "145637": {
+    "taxa_exame": 0.0,
+    "taxa_20min": 100.0,
+    "total": 1,
+    "exames": 0,
+    "menos20": 1
+  },
+  "96791": {
+    "taxa_exame": 28.6,
+    "taxa_20min": 40.0,
+    "total": 35,
+    "exames": 10,
+    "menos20": 14
+  },
+  "190082": {
+    "taxa_exame": 0.0,
+    "taxa_20min": 100.0,
+    "total": 1,
+    "exames": 0,
+    "menos20": 1
+  },
+  "191475": {
+    "taxa_exame": 21.1,
+    "taxa_20min": 34.2,
+    "total": 38,
+    "exames": 8,
+    "menos20": 13
+  },
+  "237083": {
+    "taxa_exame": 16.0,
+    "taxa_20min": 48.0,
+    "total": 25,
+    "exames": 4,
+    "menos20": 12
+  },
+  "121923": {
+    "taxa_exame": 35.3,
+    "taxa_20min": 47.1,
+    "total": 17,
+    "exames": 6,
+    "menos20": 8
+  },
+  "213232": {
+    "taxa_exame": 45.0,
+    "taxa_20min": 40.0,
+    "total": 20,
+    "exames": 9,
+    "menos20": 8
+  },
+  "145678": {
+    "taxa_exame": 43.3,
+    "taxa_20min": 13.3,
+    "total": 30,
+    "exames": 13,
+    "menos20": 4
+  },
+  "207165": {
+    "taxa_exame": 0.0,
+    "taxa_20min": 53.3,
+    "total": 15,
+    "exames": 0,
+    "menos20": 8
+  },
+  "155996": {
+    "taxa_exame": 50.0,
+    "taxa_20min": 50.0,
+    "total": 4,
+    "exames": 2,
+    "menos20": 2
+  },
+  "220733": {
+    "taxa_exame": 0.0,
+    "taxa_20min": 100.0,
+    "total": 2,
+    "exames": 0,
+    "menos20": 2
+  },
+  "134015": {
+    "taxa_exame": 0.0,
+    "taxa_20min": 100.0,
+    "total": 1,
+    "exames": 0,
+    "menos20": 1
+  },
+  "206520": {
+    "taxa_exame": 25.0,
+    "taxa_20min": 25.0,
+    "total": 4,
+    "exames": 1,
+    "menos20": 1
+  },
+  "192048": {
+    "taxa_exame": 0.0,
+    "taxa_20min": 16.7,
+    "total": 6,
+    "exames": 0,
+    "menos20": 1
+  }
+}
