@@ -387,6 +387,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <button class="tab active" onclick="gTab('hora',this)">Por hora</button>
         <button class="tab" onclick="gTab('dia',this)">Por dia</button>
         <button class="tab" onclick="gTab('ranking',this)">Ranking médicos</button>
+        <button class="tab" onclick="gTab('indicadores',this)">Indicadores</button>
         <button class="tab" onclick="gTab('medico',this)">Por médico</button>
       </div>
       <div id="gTabHora" class="tab-panel active">
@@ -401,6 +402,22 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
       <div id="gTabRanking" class="tab-panel">
         <div class="chart-wrap" style="height:380px"><canvas id="gcRanking"></canvas></div>
+      </div>
+      <div id="gTabIndicadores" class="tab-panel">
+        <div style="margin-bottom:1rem;display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+          <div style="font-size:13px;color:var(--text-muted)">Ordenar por:</div>
+          <select id="gIndOrdem" onchange="renderIndicadores()" style="width:auto;margin-bottom:0;font-size:13px">
+            <option value="nps">NPS</option>
+            <option value="is">IS</option>
+            <option value="prod">Produtividade</option>
+            <option value="t20">Atend. &lt;20min</option>
+            <option value="atend">Atendimentos</option>
+          </select>
+        </div>
+        <div id="gIndTabela" style="overflow-x:auto">
+          <table id="tabelaIndicadores" style="width:100%;border-collapse:collapse;font-size:13px;font-family:'Helvetica Neue',sans-serif">
+          </table>
+        </div>
       </div>
       <div id="gTabMedico" class="tab-panel">
         <div style="display:flex;align-items:center;gap:12px;margin-bottom:1rem;flex-wrap:wrap">
@@ -496,6 +513,7 @@ let remoteSenhas = {};
 let remoteHoras = {};
 let remoteNps = {};
 let remoteMetricas = {};
+let remoteIs = {};
 let currentUser = null;
 let pendingUser = null;
 
@@ -599,6 +617,10 @@ async function loadMonth(m) {
   try {
     const r = await fetch(`${BASE_URL}/metricas-${m}.json?t=${Date.now()}`);
     if (r.ok) { remoteMetricas = await r.json(); }
+  } catch(e) {}
+  try {
+    const r = await fetch(`${BASE_URL}/is-${m}.json?t=${Date.now()}`);
+    if (r.ok) { remoteIs = await r.json(); }
   } catch(e) {}
 }
 
@@ -915,6 +937,75 @@ function renderGestor() {
   makeBarH('gcRanking', sorted.map(e => e[0].split(' ').slice(0, 2).join(' ')), sorted.map(e => e[1]));
 }
 
+function renderIndicadores() {
+  const ordem = document.getElementById('gIndOrdem').value;
+  const medicos = getMedicos();
+  const rows = Object.entries(medicos).map(([crm, nome]) => {
+    const nps = remoteNps[crm];
+    const is = remoteIs[crm];
+    const met = remoteMetricas[crm];
+    const hor = remoteHoras[crm];
+    const myRows = allRows.filter(r => r._crm === crm);
+    const total = myRows.length;
+    const horasTot = hor ? hor.horas_total : 0;
+    const prod = horasTot > 0 ? (total / horasTot) : 0;
+    return { crm, nome, total, nps: nps ? nps.nps : null, npsTotal: nps ? nps.total : 0,
+      is: is ? is.is_combinado : null, isClass: is ? is.classificacao : '',
+      prod: prod, t20: met ? met.taxa_20min : null, exame: met ? met.taxa_exame : null };
+  }).filter(r => r.total > 0);
+
+  rows.sort((a, b) => {
+    if (ordem === 'nps') return (b.nps ?? -999) - (a.nps ?? -999);
+    if (ordem === 'is') return (b.is ?? -1) - (a.is ?? -1);
+    if (ordem === 'prod') return b.prod - a.prod;
+    if (ordem === 't20') return (b.t20 ?? -1) - (a.t20 ?? -1);
+    if (ordem === 'atend') return b.total - a.total;
+    return 0;
+  });
+
+  const NPS_META = 80;
+  const npsCol = v => v === null ? '<span style="color:#4a5568">—</span>' :
+    `<span style="color:${v >= NPS_META ? '#34d399' : v >= 0 ? '#fbbf24' : '#f87171'};font-weight:500">${v > 0 ? '+' : ''}${v}</span>`;
+  const isCol = (v, cl) => v === null ? '<span style="color:#4a5568">—</span>' :
+    `<span style="color:${v >= 4.5 ? '#34d399' : v >= 3.5 ? '#fbbf24' : '#f87171'}">${v.toFixed(1)} <span style="font-size:11px;color:#8892aa">${cl}</span></span>`;
+  const t20Col = v => v === null ? '<span style="color:#4a5568">—</span>' :
+    `<span style="color:${v >= 80 ? '#34d399' : v >= 60 ? '#fbbf24' : '#f87171'}">${v}%</span>`;
+  const prodCol = v => v === 0 ? '<span style="color:#4a5568">—</span>' :
+    `<span style="color:#e8eaf0">${v.toFixed(2)}</span>`;
+
+  const th = s => `<th style="text-align:left;padding:8px 10px;color:#8892aa;border-bottom:1px solid #2a3349;white-space:nowrap">${s}</th>`;
+  const td = s => `<td style="padding:8px 10px;border-bottom:1px solid #1e2535;color:#e8eaf0;white-space:nowrap">${s}</td>`;
+
+  const table = document.getElementById('tabelaIndicadores');
+  table.innerHTML = `
+    <thead><tr>${th('#')}${th('Médico')}${th('Atend.')}${th('NPS')}${th('Aval.')}${th('IS')}${th('Produt.')}${th('&lt;20min')}${th('Exames')}</tr></thead>
+    <tbody>${rows.map((r, i) => `<tr style="cursor:pointer" onclick="irParaMedico('${r.crm}')">
+      ${td(`<span style="color:#4a5568">${i+1}</span>`)}
+      ${td(`<span style="font-weight:500">${r.nome.split(' ').slice(0,3).join(' ')}</span><br><span style="font-size:11px;color:#4a5568">CRM ${r.crm}</span>`)}
+      ${td(r.total)}
+      ${td(npsCol(r.nps))}
+      ${td(`<span style="color:#4a5568">${r.npsTotal || '—'}</span>`)}
+      ${td(isCol(r.is, r.isClass))}
+      ${td(prodCol(r.prod))}
+      ${td(t20Col(r.t20))}
+      ${td(r.exame !== null ? `<span style="color:#8892aa">${r.exame}%</span>` : '<span style="color:#4a5568">—</span>')}
+    </tr>`).join('')}</tbody>
+  `;
+}
+
+function irParaMedico(crm) {
+  const sel = document.getElementById('gSelMedico');
+  if (!sel) return;
+  document.querySelectorAll('#gestorScreen .tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('#gestorScreen .tab-panel').forEach(p => p.classList.remove('active'));
+  const medicoTabBtn = document.querySelector('#gestorScreen .tabs button:last-child');
+  if (medicoTabBtn) medicoTabBtn.classList.add('active');
+  document.getElementById('gTabMedico').classList.add('active');
+  populateGestorMedicoSelectors();
+  sel.value = crm;
+  renderGestorMedico();
+}
+
 function populateGestorHoraSelector() {
   const sel = document.getElementById('gSelDiaHora');
   if (!sel) return;
@@ -958,6 +1049,7 @@ function gTab(id, btn) {
     if (id === 'hora') { destroyChart('gcHora'); populateGestorHoraSelector(); renderGestorHora(); }
     if (id === 'dia') { destroyChart('gcDia'); renderGestor(); }
     if (id === 'ranking') { destroyChart('gcRanking'); renderGestor(); }
+    if (id === 'indicadores') { renderIndicadores(); }
     if (id === 'medico') { populateGestorMedicoSelectors(); renderGestorMedico(); }
   }, 10);
 }
@@ -1011,11 +1103,11 @@ function renderGestorMedico() {
   const gNpsMeta = gNps ? `<div style="font-size:11px;color:var(--text-muted);margin-top:2px">meta: +${NPS_META}</div>` : '';
   document.getElementById('gMedMetrics').innerHTML = `
     <div class="metric"><div class="metric-label">Atendimentos</div><div class="metric-value">${total}</div></div>
-    <div class="metric"><div class="metric-label">Plantões / horas</div><div class="metric-value">${pi.plantoes} <span style="font-size:14px;color:var(--text-muted)">/ ${horasTotaisG > 0 ? horasTotaisG+'h' : '—'}</span></div></div>
     <div class="metric"><div class="metric-label">Horas no mês</div><div class="metric-value">${hPlanilha}</div></div>
     <div class="metric"><div class="metric-label">NPS ${gNps ? `<span style="font-size:11px;color:var(--text-muted)">(${gNps.total} aval.)</span>` : ''}</div><div class="metric-value" style="color:${gNpsColor}">${gNpsLabel}</div>${gNpsMeta}</div>
     <div class="metric"><div class="metric-label">Produtiv. (atend/h) <span style="font-size:12px;color:var(--text-muted)">/ meta</span></div><div class="metric-value">${media} <span style="font-size:14px;color:var(--text-muted)">/ ${META_BASE}</span></div></div>
     ${(() => { const m = remoteMetricas[crm]; if (!m) return ''; const t20Color = m.taxa_20min >= 80 ? '#34d399' : m.taxa_20min >= 60 ? '#fbbf24' : '#f87171'; return `<div class="metric"><div class="metric-label">Taxa exames</div><div class="metric-value" style="color:#8892aa">${m.taxa_exame}%</div></div><div class="metric"><div class="metric-label">Atend. &lt;20min</div><div class="metric-value" style="color:${t20Color}">${m.taxa_20min}%</div></div>`; })()}
+    ${(() => { const is = remoteIs[crm]; if (!is) return ''; const isColor = is.is_combinado >= 4.5 ? '#34d399' : is.is_combinado >= 3.5 ? '#fbbf24' : '#f87171'; return `<div class="metric"><div class="metric-label">IS médico <span style="font-size:11px;color:var(--text-muted)">(${is.classificacao})</span></div><div class="metric-value" style="color:${isColor}">${is.is_combinado.toFixed(1)}</div></div>`; })()}
   `;
   const hours = Array.from({length:24},(_,i)=>i);
   const horaData = hours.map(h=>hc[h]||0);
@@ -1109,11 +1201,11 @@ function renderMedDash() {
   const npsMeta = npsData ? `<div style="font-size:11px;color:var(--text-muted);margin-top:2px">meta: +${NPS_META}</div>` : '';
   document.getElementById('medMetrics').innerHTML = `
     <div class="metric"><div class="metric-label">Atendimentos</div><div class="metric-value">${total}</div></div>
-    <div class="metric"><div class="metric-label">Plantões / horas</div><div class="metric-value">${plantoes} <span style="font-size:14px;color:var(--text-muted)">/ ${horasTotais > 0 ? horasTotais+'h' : '—'}</span></div></div>
     <div class="metric"><div class="metric-label">Horas no mês</div><div class="metric-value">${horasPlanilha}</div></div>
     <div class="metric"><div class="metric-label">NPS ${npsData ? `<span style="font-size:11px;color:var(--text-muted)">(${npsData.total} aval.)</span>` : ''}</div><div class="metric-value" style="color:${npsColor}">${npsLabel}</div>${npsMeta}</div>
     <div class="metric"><div class="metric-label">Produtiv. (atend/h) <span style="font-size:12px;color:var(--text-muted)">/ meta</span></div><div class="metric-value">${media} <span style="font-size:14px;color:var(--text-muted)">/ ${META_BASE}</span></div></div>
     ${(() => { const m = remoteMetricas[currentUser.crm]; if (!m) return ''; const exColor = '#8892aa'; const t20Color = m.taxa_20min >= 80 ? '#34d399' : m.taxa_20min >= 60 ? '#fbbf24' : '#f87171'; return `<div class="metric"><div class="metric-label">Taxa exames</div><div class="metric-value" style="color:${exColor}">${m.taxa_exame}%</div></div><div class="metric"><div class="metric-label">Atend. &lt;20min</div><div class="metric-value" style="color:${t20Color}">${m.taxa_20min}%</div></div>`; })()}
+    ${(() => { const is = remoteIs[currentUser.crm]; if (!is) return ''; const isColor = is.is_combinado >= 4.5 ? '#34d399' : is.is_combinado >= 3.5 ? '#fbbf24' : '#f87171'; return `<div class="metric"><div class="metric-label">IS médico <span style="font-size:11px;color:var(--text-muted)">(${is.classificacao})</span></div><div class="metric-value" style="color:${isColor}">${is.is_combinado.toFixed(1)}</div></div>`; })()}
   `;
   const hours = Array.from({ length: 24 }, (_, i) => i);
   const horaData = hours.map(h => hc[h] || 0);
