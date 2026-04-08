@@ -273,36 +273,38 @@ async function gerar() {
       const ext = name.split('.').pop().toLowerCase();
       let rows = [];
       if (ext === 'xls') {
-        // Try UTF-16 first (legacy XLS from this system)
-        try {
-          const bytes = new Uint8Array(buf);
-          let text = '';
-          if (bytes[0] === 0xFE && bytes[1] === 0xFF) {
-            text = new TextDecoder('utf-16be').decode(buf);
-          } else if (bytes[0] === 0xFF && bytes[1] === 0xFE) {
-            text = new TextDecoder('utf-16le').decode(buf);
-          } else {
-            text = new TextDecoder('utf-16be').decode(buf);
-          }
-          text = text.replace(/^\uFEFF/, '');
-          const lines = text.split('\n').filter(l => l.trim());
-          if (lines.length >= 2) {
-            const headers = lines[0].split('\t').map(h => h.trim());
-            const objs = [];
-            for (let i = 1; i < lines.length; i++) {
-              const vals = lines[i].split('\t');
-              const obj = {};
-              headers.forEach((h, j) => obj[h] = (vals[j] || '').trim());
-              objs.push(obj);
+        // Try multiple encodings for legacy XLS
+        let parsed = false;
+        const encodings = ['utf-16be', 'utf-16le'];
+        for (const enc of encodings) {
+          if (parsed) break;
+          try {
+            const text = new TextDecoder(enc, {fatal: true}).decode(buf).replace(/^\uFEFF/, '');
+            const lines = text.split('\n').filter(l => l.trim());
+            if (lines.length >= 2 && lines[0].includes('\t')) {
+              const headers = lines[0].split('\t').map(h => h.trim());
+              if (headers.some(h => h.includes('MEDICO') || h.includes('DT ENTRADA') || h.includes('ATENDIMENTO'))) {
+                const objs = [];
+                for (let i = 1; i < lines.length; i++) {
+                  const vals = lines[i].split('\t');
+                  const obj = {};
+                  headers.forEach((h, j) => obj[h] = (vals[j] || '').trim());
+                  objs.push(obj);
+                }
+                rows = processRows(objs);
+                if (rows.length > 0) parsed = true;
+              }
             }
-            rows = processRows(objs);
-          }
-        } catch(e2) {
+          } catch(e2) {}
+        }
+        if (!parsed) {
           // Fallback to XLSX binary read
-          const wb = XLSX.read(buf, { type: 'array', cellDates: true });
-          const ws = wb.Sheets[wb.SheetNames[0]];
-          const json = XLSX.utils.sheet_to_json(ws, { defval: '' });
-          rows = processRows(json);
+          try {
+            const wb = XLSX.read(buf, { type: 'array', cellDates: true });
+            const ws = wb.Sheets[wb.SheetNames[0]];
+            const json = XLSX.utils.sheet_to_json(ws, { defval: '' });
+            rows = processRows(json);
+          } catch(e3) { console.error('XLSX fallback failed', e3); }
         }
       } else {
         const wb = XLSX.read(buf, { type: 'array', cellDates: true });
@@ -323,8 +325,8 @@ async function gerar() {
     } catch(e) { console.error(name, e); }
   }
 
-  if (allRows.length === 0) {
-    st.textContent = 'Nenhuma linha válida encontrada nos arquivos.';
+  if (allRows.length === 0 && newRows === 0) {
+    st.textContent = 'Nenhuma linha válida encontrada. Verifique se o arquivo é de atendimentos (deve ter colunas MEDICO e DT ENTRADA).';
     st.className = 'status err';
     btn.disabled = false;
     return;
