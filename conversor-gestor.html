@@ -504,9 +504,19 @@ async function processHoras(file) {
   const ws = wb.Sheets[wb.SheetNames[0]];
   const allRows = XLSX.utils.sheet_to_array(ws);
   const result = {};
-  // Detect format: 3-col (M,T,N) or 2-col (D,N) by checking row 5
+  // Find the header row (row index 4) and D/N row (index 5)
   const dnRow = allRows[5] || [];
-  const has3cols = dnRow.some(c => c === 'T');
+  // Count how many Total columns at the end: find last 'Total' in row 4
+  const headerRow = allRows[4] || [];
+  let totalColStart = -1;
+  for (let i = headerRow.length - 1; i >= 0; i--) {
+    if (headerRow[i] === 'Total') { totalColStart = i; break; }
+  }
+  // How many cols after totalColStart
+  const totalCols = totalColStart >= 0 ? headerRow.length - totalColStart : 0;
+  // 3-col: M,T,N = 3 cols after Total header; 2-col: D,N = 2 cols
+  const has3cols = totalCols >= 3 || dnRow.some(c => c === 'T');
+
   for (let i = 6; i < allRows.length; i++) {
     const row = allRows[i];
     const nome = row[0];
@@ -517,21 +527,24 @@ async function processHoras(file) {
     if (!/^\d+$/.test(crm)) continue;
     let totalM = 0, totalT = 0, totalN = 0;
     if (has3cols) {
-      totalM = parseFloat(row[row.length-3] || 0) || 0;
-      totalT = parseFloat(row[row.length-2] || 0) || 0;
-      totalN = parseFloat(row[row.length-1] || 0) || 0;
+      // Last 3 cols are M, T, N totals
+      totalM = parseFloat(row[row.length-3]) || 0;
+      totalT = parseFloat(row[row.length-2]) || 0;
+      totalN = parseFloat(row[row.length-1]) || 0;
     } else {
-      totalM = parseFloat(row[row.length-2] || 0) || 0;
-      totalN = parseFloat(row[row.length-1] || 0) || 0;
+      totalM = parseFloat(row[row.length-2]) || 0;
+      totalN = parseFloat(row[row.length-1]) || 0;
     }
     const totalD = totalM + totalT;
+    const totalGeral = totalD + totalN;
+    if (totalGeral === 0) continue; // skip rows with no hours
     result[crm] = {
       nome: nome.trim(),
       horas_manha: Math.round(totalM * 10) / 10,
       horas_tarde: Math.round(totalT * 10) / 10,
       horas_noturno: Math.round(totalN * 10) / 10,
       horas_diurno: Math.round(totalD * 10) / 10,
-      horas_total: Math.round((totalD + totalN) * 10) / 10
+      horas_total: Math.round(totalGeral * 10) / 10
     };
   }
   return result;
